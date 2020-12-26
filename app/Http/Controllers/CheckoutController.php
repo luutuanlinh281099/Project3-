@@ -12,6 +12,7 @@ use App\Brand;
 use App\Category;
 use Gloudemans\Shoppingcart\Facades\Cart as FacadesCart;
 use Illuminate\Support\Facades\Mail;
+use Brian2694\Toastr\Facades\Toastr;
 
 class CheckoutController extends Controller
 {
@@ -48,17 +49,19 @@ class CheckoutController extends Controller
                 'product_qty' => $v_content->qty,
             ]);
         }
-        // gủi mail
-        $data['info'] = $request->all();
+        Toastr::success('Thanh toán thành công', 'THANH TOÁN', ["positionClass" => "toast-top-center"]);
+        return redirect()->route('checkout.mail');
+    }
+
+    public function mail()
+    {
         $data['cart'] = FacadesCart::content();
-        $email = $request->email;
-        Mail::send('errors.email', $data, function($message) use ($email){
-            $message->from('tuanlinh99lfc@gmail.com', 'Tuấn Linh');
-            $message->to($email, $email);
-            $message->cc('tuanlinh99lfc@gmail.com', 'Tuấn Linh');
-            $message->subject('Xác nhận hóa đơn');
+        $to_name = 'Tuấn Linh';
+        $to_email = 'sutlavao99l@gmail.com';
+        Mail::send('errors.mail', $data['cart'],function($message) use ($to_name,$to_email){
+            $message->to($to_email)->subject('test mail nhé');
+            $message->from($to_email,$to_name);
         });
-        FacadesCart::destroy();
         return redirect()->route('checkout.thank');
     }
 
@@ -67,6 +70,7 @@ class CheckoutController extends Controller
         $categories = Category::where('parent_id', 0)->get();
         $brands = Brand::get();
         $sliders = Slider::latest()->get();
+        FacadesCart::destroy();
         return view('errors.thank', compact('sliders', 'categories', 'brands',));
     }
 }

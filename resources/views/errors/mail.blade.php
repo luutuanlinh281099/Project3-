@@ -1,11 +1,4 @@
 <div>
-    <h3 style="color: yellow"> Thông tin đơn hàng </h3>
-    <p> Khách hàng: {{ $info['name'] }} </p>
-    <p> Email: {{ $info['email'] }} </p>
-    <p> Điện thoại: {{ $info['phone'] }} </p>
-    <p> Địa chỉ: {{ $info['address'] }} </p>
-</div>
-<div>
     <h3 style="color: yellow">Thông tin đặt hàng</h3>
     <table class="table table-condensed">
         <thead>

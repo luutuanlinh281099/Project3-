@@ -13,6 +13,14 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a href="{{ route('admin.home') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Trang chủ
+                        </p>
+                    </a>
+                </li>
                 <!-- Menu -->
                 <li class="nav-item">
                     <a href="{{ route('menu.index') }}" class="nav-link">

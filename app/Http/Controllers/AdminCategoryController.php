@@ -6,6 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use App\Components\Recusive;
 use Illuminate\Support\Str;
+use Brian2694\Toastr\Facades\Toastr;
 
 class AdminCategoryController extends Controller
 {
@@ -35,6 +36,7 @@ class AdminCategoryController extends Controller
             'parent_id' => $request->parent_id,
             'slug' => str::slug($request->name)
         ]);
+        Toastr::success('Thêm mới thành công', 'DANH MỤC', ["positionClass" => "toast-top-center"]);
         return redirect()->route('category.index');
     }
 
@@ -52,12 +54,14 @@ class AdminCategoryController extends Controller
             'parent_id' => $request->parent_id,
             'slug' => str::slug($request->name)
         ]);
+        Toastr::warning('Cập nhật thành công', 'DANH MỤC', ["positionClass" => "toast-top-center"]);
         return redirect()->route('category.index');
     }
 
     public function delete($id)
     {
         $this->category->find($id)->delete();
+        Toastr::error('Xóa thành công', 'DANH MỤC', ["positionClass" => "toast-top-center"]);
         return redirect()->route('category.index');
     }
 

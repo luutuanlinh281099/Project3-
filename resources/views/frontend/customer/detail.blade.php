@@ -36,6 +36,7 @@
                                 <th scope="col">Sản phẩm</th>
                                 <th scope="col">Giá </th>
                                 <th scope="col">Số lượng</th>
+                                <th scope="col">Thời gian</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,6 +46,7 @@
                                 <th>{{ $Item->product_name }}</th>
                                 <td>{{ $Item->product_price}}</td>
                                 <td>{{ $Item->product_qty}}</td>
+                                <td>{{ $Item->created_at }}</td>
                             </tr>
                             @endforeach
                         </tbody>

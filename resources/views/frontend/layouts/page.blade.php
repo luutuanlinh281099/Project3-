@@ -12,6 +12,7 @@
     <link href="{{ asset('/eshopper/css/price-range.css') }}" rel="stylesheet">
     <link href="{{ asset('/eshopper/css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('/eshopper/css/main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     @yield('css')
 </head>
 
@@ -26,6 +27,9 @@
     <script src="{{ asset('/eshopper/js/price-range.js') }}"></script>
     <script src="{{ asset('/eshopper/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('/eshopper/js/main.js') }}"></script>
+    <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
     @yield('js')
 </body>
 

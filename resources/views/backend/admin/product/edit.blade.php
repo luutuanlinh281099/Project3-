@@ -71,6 +71,10 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label>Lượt xem</label>
+                            <input type="text" class="form-control" name="view" placeholder="Nhập lượt xem" value="{{ $product->view }}">
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">

@@ -32,6 +32,7 @@
                                 <th scope="col">Hình ảnh</th>
                                 <th scope="col">Danh mục</th>
                                 <th scope="col">Thương hiệu</th>
+                                <th scope="col">Lượt xem</th>
                                 <th scope="col">Quản lí</th>
                             </tr>
                         </thead>
@@ -46,6 +47,7 @@
                                 </td>
                                 <td>{{ optional($productItem->category)->name }}</td>
                                 <td>{{ optional($productItem->brand)->name }}</td>
+                                <th>{{ $productItem->view }}</th>
                                 <td>
                                     <a href="{{ route('product.edit', ['id' => $productItem->id]) }}" class="btn btn-default">Chỉnh sửa</a>
                                     <a href="{{ route('product.delete', ['id' => $productItem->id]) }}" class="btn btn-danger">Xóa bỏ</a>

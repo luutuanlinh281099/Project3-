@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Gloudemans\Shoppingcart\Facades\Cart as FacadesCart;
+use Brian2694\Toastr\Facades\Toastr;
 
 session_start();
 class CustomerController extends Controller
@@ -27,8 +28,10 @@ class CustomerController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ])) {
+            Toastr::info('Đăng nhập thành công', 'ĐĂNG NHẬP', ["positionClass" => "toast-top-center"]);
             return redirect()->route('page.home');
         } else {
+            Toastr::error('Đăng nhập thất bại', 'ĐĂNG NHẬP', ["positionClass" => "toast-top-center"]);
             return redirect()->route('customer.login');
         }
     }
@@ -38,6 +41,7 @@ class CustomerController extends Controller
     {
         Auth::logout();
         FacadesCart::destroy();
+        Toastr::info('Đăng xuất thành công', 'ĐĂNG XUẤT', ["positionClass" => "toast-top-center"]);
         return redirect()->route('page.home');
     }
     //  đăng kí
@@ -52,6 +56,7 @@ class CustomerController extends Controller
             'user_id' => $user->id,
             'role_id' => $request->role_id,
         ]);
+        Toastr::success('Đăng kí thành công', 'THÀNH VIÊN', ["positionClass" => "toast-top-center"]);
         return redirect()->route('customer.login');
     }
 
@@ -76,6 +81,7 @@ class CustomerController extends Controller
         User::find($id)->update([
             'password' => Hash::make($request->password)
         ]);
+        Toastr::warning('Đổi mật khẩu thành công', 'THÀNH VIÊN', ["positionClass" => "toast-top-center"]);
         return redirect()->route('customer.show' , ['id' => Auth::user()->id]);
     }
 

@@ -38,6 +38,9 @@
 							<input type="text" name="name" placeholder="Họ tên">
 							<input type="text" name="email" placeholder="Email">
 							<input type="text" name="address" placeholder="Địa chỉ">
+							<select>
+								<option value="hanoi" data-ship-fee="0.1">Hanoi</option>
+							</select>
 							<input type="text" name="phone" placeholder="Điện thoại">
 							<textarea name="note" rows="5"> Ghi chú </textarea>
 							<input class="btn btn-primary" type="submit" name="bill" placeholder="Gửi">
@@ -49,7 +52,7 @@
 		<div class="payment-options">
 			<h2>Chọn hình thức thanh toán</h2>
 			<span>
-				<label><input type="checkbox">Thanh toán khi nhận hàng</label>
+				<label><input type="checkbox" checked="checked">Thanh toán khi nhận hàng</label>
 			</span>
 			<span>
 				<label><input type="checkbox">Thanh toán qua ATM</label>

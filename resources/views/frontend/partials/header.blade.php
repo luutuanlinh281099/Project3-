@@ -91,12 +91,8 @@
 					<div class="mainmenu pull-left">
 						<ul class="nav navbar-nav collapse navbar-collapse">
 							<li><a href="{{ route('page.home')}}" class="active">Trang chủ</a></li>
-							<li class="dropdown"><a href="#">Tin tức<i class="fa fa-angle-down"></i></a>
-								<ul role="menu" class="sub-menu">
-									<li><a href="">Tin tức mới nhất</a></li>
-									<li><a href="">Tổng hợp tin</a></li>
-								</ul>
-							</li>
+							<li><a href="{{ route('product.all')}}">Sản phẩm</a></li>
+							<li><a href="">Tin tức</a></li>
 						</ul>
 					</div>
 				</div>

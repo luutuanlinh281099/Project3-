@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
-
+use Brian2694\Toastr\Facades\Toastr;
 class AdminUserController extends Controller
 {
     private $user;
@@ -42,6 +42,7 @@ class AdminUserController extends Controller
             ]);
             $user->roles()->attach($request->role_id);
             DB::commit();
+            Toastr::success('Thêm mới thành công', 'THÀNH VIÊN', ["positionClass" => "toast-top-center"]);
             return redirect()->route('user.index');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -69,6 +70,7 @@ class AdminUserController extends Controller
             $user = $this->user->find($id);
             $user->roles()->sync($request->role_id);
             DB::commit();
+            Toastr::warning('Cập nhật thành công', 'THÀNH VIÊN', ["positionClass" => "toast-top-center"]);
             return redirect()->route('user.index');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -79,6 +81,7 @@ class AdminUserController extends Controller
     public function delete($id)
     {
         $this->user->find($id)->delete();
+        Toastr::error('Xóa thành công', 'THÀNH VIÊN', ["positionClass" => "toast-top-center"]);
         return redirect()->route('user.index');
     }
 }

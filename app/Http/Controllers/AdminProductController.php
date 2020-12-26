@@ -14,6 +14,7 @@ use App\Traits\StorageImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Brian2694\Toastr\Facades\Toastr;
 
 class AdminProductController extends Controller
 {
@@ -68,6 +69,7 @@ class AdminProductController extends Controller
                 'user_id' => auth()->id(),
                 'category_id' => $request->category_id,
                 'brand_id' => $request->brand_id,
+                'view' => $request->view,
             ];
             $dataUploadFeatureImage = $this->storageTraitUpload($request, 'feature_image_path', 'product');
             if (!empty($dataUploadFeatureImage)) {
@@ -98,6 +100,7 @@ class AdminProductController extends Controller
             }
             $product->tags()->attach($tagIds);
             DB::commit();
+            Toastr::success('Thêm mới thành công', 'SẢN PHẨM', ["positionClass" => "toast-top-center"]);
             return redirect()->route('product.index');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -125,6 +128,7 @@ class AdminProductController extends Controller
                 'user_id' => auth()->id(),
                 'category_id' => $request->category_id,
                 'brand_id' => $request->brand_id,
+                'view' => $request->view,
             ];
             $dataUploadFeatureImage = $this->storageTraitUpload($request, 'feature_image_path', 'product');
             if (!empty($dataUploadFeatureImage)) {
@@ -157,6 +161,7 @@ class AdminProductController extends Controller
             }
             $product->tags()->sync($tagIds);
             DB::commit();
+            Toastr::warning('Cập nhật thành công', 'SẢN PHẨM', ["positionClass" => "toast-top-center"]);
             return redirect()->route('product.index');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -166,6 +171,7 @@ class AdminProductController extends Controller
 
     public function delete($id) {
         $this->product->find($id)->delete();
+        Toastr::error('Xóa thành công', 'SẢN PHẨM', ["positionClass" => "toast-top-center"]);
         return redirect()->route('product.index');
     }
 }

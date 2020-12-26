@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 
 class AdminOrderController extends Controller
 {
@@ -24,6 +25,7 @@ class AdminOrderController extends Controller
     {
         $order = $this->order->find($id);
         return view('backend.admin.order.edit', compact('order'));
+        Toastr::warning('Cập nhật thành công', 'ĐƠN HÀNG', ["positionClass" => "toast-top-center"]);
     }
 
     public function update(Request $request, $id)
@@ -41,9 +43,21 @@ class AdminOrderController extends Controller
         return view('backend.admin.order.detail', compact('order' ,'orderDetails'));
     }
 
-    public function no()
+    public function unconfimred()
     {
         $orders = $this->order->where('order_status', 'chờ xác nhận')->paginate(10);
+        return view('backend.admin.order.index', compact('orders'));
+    }
+
+    public function shipping()
+    {
+        $orders = $this->order->where('order_status', 'đang giao hàng')->paginate(10);
+        return view('backend.admin.order.index', compact('orders'));
+    }
+
+    public function delivered()
+    {
+        $orders = $this->order->where('order_status', 'đã giao hàng')->paginate(10);
         return view('backend.admin.order.index', compact('orders'));
     }
 }

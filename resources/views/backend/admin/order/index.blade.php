@@ -20,7 +20,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{ route('order.no') }}" class="btn btn-danger float-right m-2">Đơn hàng chưa xác nhận </a>
+                    <a href="{{ route('order.unconfimred') }}" class="btn btn-danger float-left m-2">Đơn hàng chưa xác nhận </a>
+                    <a href="{{ route('order.shipping') }}" class="btn btn-danger float-left m-2">Đơn hàng đang giao </a>
+                    <a href="{{ route('order.delivered') }}" class="btn btn-danger float-left m-2">Đơn hàng đã giao </a>
                 </div>
                 <div class="col-md-12">
                     <table class="table">

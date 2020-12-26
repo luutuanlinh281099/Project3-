@@ -21,7 +21,7 @@ Route::get('/adminlogin', [
 ]);
 Route::post('/adminlogin', [
     'as' => 'admin.post-login',
-    'uses' => 'AdminController@postLoginAdmin'
+    'uses' => 'AdminController@postLoginAdmin',
 ]);
 Route::get('/adminlogout', [
     'as' => 'admin.logout',
@@ -301,9 +301,17 @@ Route::prefix('order')->group(function () {
         'uses' => 'AdminOrderController@detail',
         'middleware' => 'can:order',
     ]);
-    Route::get('/no', [
-        'as' => 'order.no',
-        'uses' => 'AdminOrderController@no',
+    Route::get('/unconfimred', [
+        'as' => 'order.unconfimred',
+        'uses' => 'AdminOrderController@unconfimred',
+    ]);
+    Route::get('/shipping', [
+        'as' => 'order.shipping',
+        'uses' => 'AdminOrderController@shipping',
+    ]);
+    Route::get('/delivered', [
+        'as' => 'order.delivered',
+        'uses' => 'AdminOrderController@delivered',
     ]);
 });
 
@@ -344,6 +352,11 @@ Route::get('/detail/{id}', [
 Route::post('/search', [
     'as' => 'page.search',
     'uses' => 'HomePageController@search',
+]);
+
+Route::get('/all', [
+    'as' => 'product.all',
+    'uses' => 'ProductController@allProduct',
 ]);
 
 Route::get('/show/{id}', [
@@ -417,6 +430,10 @@ Route::prefix('checkout')->group(function () {
     Route::post('/add', [
         'as' => 'checkout.add',
         'uses' => 'CheckoutController@add',
+    ]);
+    Route::get('/mail', [
+        'as' => 'checkout.mail',
+        'uses' => 'CheckoutController@mail',
     ]);
     Route::get('/thank', [
         'as' => 'checkout.thank',

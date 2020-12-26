@@ -6,7 +6,7 @@ use App\Components\MenuRecusive;
 use App\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
+use Brian2694\Toastr\Facades\Toastr;
 class AdminMenuController extends Controller
 {
 
@@ -37,6 +37,7 @@ class AdminMenuController extends Controller
             'parent_id' => $request->parent_id,
             'slug' => str::slug($request->name)
         ]);
+        Toastr::success('Thêm mới thành công', 'MENU', ["positionClass" => "toast-top-center"]);
         return redirect()->route('menu.index');
     }
 
@@ -54,12 +55,14 @@ class AdminMenuController extends Controller
             'parent_id' => $request->parent_id,
             'slug' => str::slug($request->name)
         ]);
+        Toastr::warning('Cập nhật thành công', 'MENU', ["positionClass" => "toast-top-center"]);
         return redirect()->route('menu.index');
     }
 
     public function delete($id)
     {
         $this->menu->find($id)->delete();
+        Toastr::error('Xóa thành công', 'MENU', ["positionClass" => "toast-top-center"]);
         return redirect()->route('menu.index');
     }
 }

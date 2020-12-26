@@ -71,6 +71,10 @@
                             <select name="tags[]" class="form-control tags_select_choose">
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label>Lượt xem</label>
+                            <input type="text" class="form-control" name="view" placeholder="Nhập lượt xem" value="">
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">

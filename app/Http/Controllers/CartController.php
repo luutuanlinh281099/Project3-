@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use Gloudemans\Shoppingcart\Facades\Cart as FacadesCart;
+use Brian2694\Toastr\Facades\Toastr;
 
 class CartController extends Controller
 {
@@ -27,6 +28,7 @@ class CartController extends Controller
             'weight' => 550,
             'options' => ['img' => $product->feature_image_path]
         ]);
+        Toastr::success('Thêm thành công', 'GIỎ HÀNG', ["positionClass" => "toast-top-center"]);
         return redirect()->route('cart.index');
     }
 
@@ -35,6 +37,7 @@ class CartController extends Controller
         $rowId = $request->rowId;
         $qty = $request->quantity;
         FacadesCart::update($rowId,$qty);
+        Toastr::warning('Cập nhật thành công', 'GIỎ HÀNG', ["positionClass" => "toast-top-center"]);
         return redirect()->route('cart.index');
     }
 
@@ -42,9 +45,11 @@ class CartController extends Controller
     {
         if ($id == 'all') {
             FacadesCart::destroy();
+            Toastr::error('Xóa toàn bộ giỏ hàng', 'GIỎ HÀNG', ["positionClass" => "toast-top-center"]);
             return redirect()->route('page.home');
         } else {
             FacadesCart::remove($id);
+            Toastr::error('Xóa thành công', 'GIỎ HÀNG', ["positionClass" => "toast-top-center"]);
             return redirect()->route('cart.index');
         }
     }

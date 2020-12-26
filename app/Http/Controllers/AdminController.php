@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 
 session_start();
 class AdminController extends Controller
@@ -21,8 +22,10 @@ class AdminController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ])) {
+            Toastr::info('Đăng nhập thành công', 'ĐĂNG NHẬP', ["positionClass" => "toast-top-center"]);
             return redirect()->route('admin.home');
         } else {
+            Toastr::error('Đăng nhập thất bại', 'ĐĂNG NHẬP', ["positionClass" => "toast-top-center"]);
             return redirect()->route('admin.login');
         }
     }
@@ -31,6 +34,7 @@ class AdminController extends Controller
     public function logout()
     {
         Auth::logout();
+        Toastr::info('Đăng xuất thành công', 'ĐĂNG XUẤT', ["positionClass" => "toast-top-center"]);
         return view('backend.login');
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Permission;
 use App\Role;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 
 class AdminRoleController extends Controller
 {
@@ -35,6 +36,7 @@ class AdminRoleController extends Controller
             'display_name' => $request->display_name
         ]);
         $role->permissions()->attach($request->permission_id);
+        Toastr::success('Thêm mới thành công', 'VAI TRÒ', ["positionClass" => "toast-top-center"]);
         return redirect()->route('role.index');
     }
 
@@ -54,12 +56,14 @@ class AdminRoleController extends Controller
             'display_name' => $request->display_name
         ]);
         $role->permissions()->sync($request->permission_id);
+        Toastr::warning('Cập nhật thành công', 'VAI TRÒ', ["positionClass" => "toast-top-center"]);
         return redirect()->route('role.index');
     }
 
     public function delete($id)
     {
         $this->role->find($id)->delete();
+        Toastr::error('Xóa thành công', 'VAI TRÒ', ["positionClass" => "toast-top-center"]);
         return redirect()->route('role.index');
     }
 }

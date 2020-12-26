@@ -7,7 +7,7 @@ use App\Slider;
 use App\Traits\StorageImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-
+use Brian2694\Toastr\Facades\Toastr;
 class AdminSliderController extends Controller
 {
     use StorageImageTrait;
@@ -39,6 +39,7 @@ class AdminSliderController extends Controller
                 $dataInsert['image_path'] = $dataImageSlider['file_path'];
             }
             $this->slider->create($dataInsert);
+            Toastr::success('Thêm mới thành công', 'SLIDER', ["positionClass" => "toast-top-center"]);
             return redirect()->route('slider.index');
         } catch (\Exception $exception) {
             Log::error('Lỗi : ' . $exception->getMessage() . '---Line: ' . $exception->getLine());
@@ -64,6 +65,7 @@ class AdminSliderController extends Controller
                 $dataUpdate['image_path'] = $dataImageSlider['file_path'];
             }
             $this->slider->find($id)->update($dataUpdate);
+            Toastr::warning('Cập nhật thành công', 'SLIDER', ["positionClass" => "toast-top-center"]);
             return redirect()->route('slider.index');
         } catch (\Exception $exception) {
             Log::error('Lỗi : ' . $exception->getMessage() . '---Line: ' . $exception->getLine());
@@ -73,6 +75,7 @@ class AdminSliderController extends Controller
     public function delete($id)
     {
         $this->slider->find($id)->delete();
+        Toastr::error('Xóa thành công', 'SLIDER', ["positionClass" => "toast-top-center"]);
         return redirect()->route('slider.index');
     }
 }
