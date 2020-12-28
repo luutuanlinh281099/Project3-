@@ -55,5 +55,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('order', function ($user) {
             return $user->checkPermissionAccess('order');
         });
+        Gate::define('ship', function ($user) {
+            return $user->checkPermissionAccess('ship');
+        });
+        Gate::define('new', function ($user) {
+            return $user->checkPermissionAccess('new');
+        });
     }
 }

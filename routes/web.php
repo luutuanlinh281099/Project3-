@@ -172,6 +172,10 @@ Route::prefix('product')->group(function () {
         'as' => 'product.store',
         'uses' => 'AdminProductController@store',
     ]);
+    Route::post('/search', [
+        'as' => 'product.search',
+        'uses' => 'AdminProductController@search',
+    ]);
     Route::get('/edit/{id}', [
         'as' => 'product.edit',
         'uses' => 'AdminProductController@edit',
@@ -315,6 +319,68 @@ Route::prefix('order')->group(function () {
     ]);
 });
 
+//  vận chuyển
+Route::prefix('ship')->group(function () {
+    Route::get('/index', [
+        'as' => 'ship.index',
+        'uses' => 'AdminShipController@index',
+        'middleware' => 'can:ship',
+    ]);
+    Route::get('/create', [
+        'as' => 'ship.create',
+        'uses' => 'AdminShipController@create',
+        'middleware' => 'can:ship',
+    ]);
+    Route::post('/store', [
+        'as' => 'ship.store',
+        'uses' => 'AdminShipController@store'
+    ]);
+    Route::get('/edit/{id}', [
+        'as' => 'ship.edit',
+        'uses' => 'AdminShipController@edit',
+        'middleware' => 'can:ship',
+    ]);
+    Route::post('/update/{id}', [
+        'as' => 'ship.update',
+        'uses' => 'AdminShipController@update'
+    ]);
+    Route::get('/delete/{id}', [
+        'as' => 'ship.delete',
+        'uses' => 'AdminShipController@delete',
+    ]);
+});
+
+//  tin tức
+Route::prefix('new')->group(function () {
+    Route::get('/index', [
+        'as' => 'new.index',
+        'uses' => 'AdminNewController@index',
+        'middleware' => 'can:new',
+    ]);
+    Route::get('/create', [
+        'as' => 'new.create',
+        'uses' => 'AdminNewController@create',
+        'middleware' => 'can:new',
+    ]);
+    Route::post('/store', [
+        'as' => 'new.store',
+        'uses' => 'AdminNewController@store'
+    ]);
+    Route::get('/edit/{id}', [
+        'as' => 'new.edit',
+        'uses' => 'AdminNewController@edit',
+        'middleware' => 'can:new',
+    ]);
+    Route::post('/update/{id}', [
+        'as' => 'new.update',
+        'uses' => 'AdminNewController@update'
+    ]);
+    Route::get('/delete/{id}', [
+        'as' => 'new.delete',
+        'uses' => 'AdminNewController@delete',
+    ]);
+});
+
 //  quyền
 Route::prefix('permissions')->group(function () {
     Route::get('/create', [
@@ -373,6 +439,10 @@ Route::prefix('cart')->group(function () {
         'as' => 'cart.add',
         'uses' => 'CartController@add',
     ]);
+    Route::get('/addfast/{id}', [
+        'as' => 'cart.addfast',
+        'uses' => 'CartController@addFast',
+    ]);
     Route::post('/update', [
         'as' => 'cart.update',
         'uses' => 'CartController@update',
@@ -427,9 +497,18 @@ Route::prefix('checkout')->group(function () {
         'as' => 'checkout.show',
         'uses' => 'CheckoutController@show',
     ]);
+    Route::get('/info', [
+        'as' => 'checkout.info',
+        'uses' => 'CheckoutController@info',
+    ]);
     Route::post('/add', [
         'as' => 'checkout.add',
         'uses' => 'CheckoutController@add',
+    ]);
+
+    Route::get('/order/{id}', [
+        'as' => 'checkout.order',
+        'uses' => 'CheckoutController@order',
     ]);
     Route::get('/mail', [
         'as' => 'checkout.mail',
@@ -438,5 +517,16 @@ Route::prefix('checkout')->group(function () {
     Route::get('/thank', [
         'as' => 'checkout.thank',
         'uses' => 'CheckoutController@thank',
+    ]);
+});
+
+Route::prefix('new')->group(function () {
+    Route::get('/all', [
+        'as' => 'new.all',
+        'uses' => 'NewController@all',
+    ]);
+    Route::get('/detail/{id}', [
+        'as' => 'new.detail',
+        'uses' => 'NewController@detail',
     ]);
 });

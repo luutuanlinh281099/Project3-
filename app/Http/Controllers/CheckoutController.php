@@ -10,6 +10,7 @@ use App\OrderDetail;
 use App\Slider;
 use App\Brand;
 use App\Category;
+use App\Ship;
 use Gloudemans\Shoppingcart\Facades\Cart as FacadesCart;
 use Illuminate\Support\Facades\Mail;
 use Brian2694\Toastr\Facades\Toastr;
@@ -20,23 +21,55 @@ class CheckoutController extends Controller
     {
         $total = FacadesCart::total();
         $carts = FacadesCart::content();
-        return view('frontend.checkout.show', compact('carts', 'total'));
+        $ships = Ship::get();
+        return view('frontend.checkout.show', compact('carts', 'total', 'ships'));
+    }
+
+    public function info()
+    {
+        $id = Auth::user()->id;
+        $bills = Bill::where('user_id', $id)->latest()->take(1)->get();
+        $total = FacadesCart::total();
+        $carts = FacadesCart::content();
+        return view('frontend.checkout.info', compact('carts', 'total', 'bills'));
     }
 
     public function add(Request $request)
     {
-        $content = FacadesCart::content();
-        $bill = Bill::create([
-            'user_id'=> Auth::user()->id,
+        Bill::create([
+            'user_id' => Auth::user()->id,
+            'ship_id' => $request->ship_id,
             'name' => $request->name,
             'email' => $request->email,
             'address' => $request->address,
             'phone' => $request->phone,
             'note' => $request->note,
         ]);
+        Toastr::success('Thông tin giao hàng đã được lưu', 'THANH TOÁN', ["positionClass" => "toast-top-center"]);
+        return redirect()->route('checkout.info');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $bill = Bill::find($id);
+        $bill->update([
+            'user_id' => Auth::user()->id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'note' => $request->note,
+        ]);
+        Toastr::warning('Thông tin gia hàng đã được cập nhật', 'THANH TOÁN', ["positionClass" => "toast-top-center"]);
+        return redirect()->route('checkout.info');
+    }
+
+    public function order($id)
+    {
+        $content = FacadesCart::content();
         $order = Order::create([
             'user_id' => Auth::user()->id,
-            'bill_id' => $bill->id,
+            'bill_id' => $id,
             'order_total' => FacadesCart::total(),
             'order_status' => 'chờ xác nhận',
         ]);
@@ -50,7 +83,7 @@ class CheckoutController extends Controller
             ]);
         }
         Toastr::success('Thanh toán thành công', 'THANH TOÁN', ["positionClass" => "toast-top-center"]);
-        return redirect()->route('checkout.mail');
+        return redirect()->route('checkout.thank');
     }
 
     public function mail()
@@ -58,9 +91,9 @@ class CheckoutController extends Controller
         $data['cart'] = FacadesCart::content();
         $to_name = 'Tuấn Linh';
         $to_email = 'sutlavao99l@gmail.com';
-        Mail::send('errors.mail', $data['cart'],function($message) use ($to_name,$to_email){
+        Mail::send('errors.mail', $data['cart'], function ($message) use ($to_name, $to_email) {
             $message->to($to_email)->subject('test mail nhé');
-            $message->from($to_email,$to_name);
+            $message->from($to_email, $to_name);
         });
         return redirect()->route('checkout.thank');
     }

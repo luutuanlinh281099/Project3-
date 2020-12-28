@@ -50,6 +50,13 @@ class AdminProductController extends Controller
         return view('backend.admin.product.add', compact('htmlOption', 'brands'));
     }
 
+    public function search(Request $request)
+    {
+        $keywords = $request->key;
+        $products = $this->product->where('name', 'like', '%'.$keywords.'%') ->get();
+        return view('backend.admin.product.search', compact('products'));
+    }
+
     public function getCategory($parentId)
     {
         $data = $this->category->all();

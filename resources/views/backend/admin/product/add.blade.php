@@ -80,7 +80,8 @@
                         <div class="form-group">
                             <label>Nhập nội dung</label>
                             <textarea name="contents" class="@error('contents')
-                                        is-invalid @enderror form-control tinymce_editor_init" rows="8">{{ old('contents') }}</textarea>
+                                        is-invalid @enderror form-control tinymce_editor_init" rows="8">{{ old('contents') }}
+                            </textarea>
                             @error('contents')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror

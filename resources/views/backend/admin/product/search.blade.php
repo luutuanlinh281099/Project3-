@@ -15,7 +15,7 @@
 
 @section('content')
 <div class="content-wrapper">
-    @include('backend.partials.content-header', ['name' => 'Sản phẩm', 'key' => 'Danh sách'])
+    @include('backend.partials.content-header', ['name' => 'Sản phẩm', 'key' => 'Tìm kiếm'])
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -57,9 +57,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
-                <div class="col-md-12">
-                    {{ $products->links() }}
                 </div>
             </div>
         </div>

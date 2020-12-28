@@ -53,9 +53,6 @@
 							@else
 							<li><a href="{{route('customer.login')}}"><i class="fa fa-user"></i>Đăng nhập</a></li>
 							@endif
-							@if(Auth::check())
-							<li><a href=""><i class="fa fa-star"></i> Đơn hàng</a></li>
-							@endif
 							@if(Auth::check() && Cart::count()>=1)
 							<li><a href="{{route('checkout.show')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
 							@elseif(Auth::check())
@@ -92,7 +89,7 @@
 						<ul class="nav navbar-nav collapse navbar-collapse">
 							<li><a href="{{ route('page.home')}}" class="active">Trang chủ</a></li>
 							<li><a href="{{ route('product.all')}}">Sản phẩm</a></li>
-							<li><a href="">Tin tức</a></li>
+							<li><a href="{{ route('new.all')}}">Tin tức</a></li>
 						</ul>
 					</div>
 				</div>

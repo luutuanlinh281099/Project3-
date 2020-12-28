@@ -32,6 +32,21 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 
+    public function addFast($id)
+    {
+        $product = Product::find($id);
+        FacadesCart::add([
+            'id' => $id,
+            'name' => $product->name,
+            'qty' => 1,
+            'price' => $product->price,
+            'weight' => 550,
+            'options' => ['img' => $product->feature_image_path]
+        ]);
+        Toastr::success('Thêm thành công', 'GIỎ HÀNG', ["positionClass" => "toast-top-center"]);
+        return redirect()->route('page.home');
+    }
+
     public function update( Request $request)
     {
         $rowId = $request->rowId;

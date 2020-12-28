@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
+use App\Product;
+use App\User;
+use App\Order;
 
 session_start();
 class AdminController extends Controller
@@ -41,6 +44,9 @@ class AdminController extends Controller
     //  trang quản lí
     public function adminhome()
     {
-        return view('backend.home');
+        $product = Product::count();
+        $customer = User::count();
+        $order = Order::count();
+        return view('backend.home', compact('product', 'customer', 'order'));
     }
 }

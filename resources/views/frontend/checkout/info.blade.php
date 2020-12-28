@@ -5,23 +5,51 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('productdetail/detail.css') }}">
+<link rel="stylesheet" href="{{ asset('home/home.css') }}">
 @endsection
 
 @section('js')
-<link rel="stylesheet" href="{{ asset('/home/home.js') }}">
+<link rel="stylesheet" href="{{ asset('home/home.js') }}">
 @endsection
 
 @section('content')
 <section id="cart_items">
+	@foreach ($bills as $bill)
 	<div class="container">
-		<div class="breadcrumbs row">
+		<div class="breadcrumbs">
 			<ol class="breadcrumb">
 				<li><a href="{{route('page.home')}}">Home</a></li>
-				<li class="active">Giỏ hàng</li>
+				<li class="active">Thanh toán</li>
 			</ol>
 		</div>
-		@if (Cart::count()>=1)
+		<div class="shopper-informations">
+			<h2>Thông tin nhận hàng</h2>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="shopper-info">
+						<p style="background:pink"> {{$bill->name}} </p>
+						<p style="background:pink"> {{$bill->email}} </p>
+						<p style="background:pink"> {{$bill->address}} </p>
+						<p style="background:pink"> {{$bill->phone}} </p>
+						<p style="background:pink"> {{$bill->note}} </p>
+						<select class="form-control select2_init" name="ship_id">
+							<option>{{ optional($bill->ship)->name }}</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="payment-options">
+				<div class="float-right col-md-6">
+					<h2></h2>
+				</div>
+				<span>
+					<h3>Thanh toán khi nhận hàng</h3>
+				</span>
+			</div>
+		</div>
+		<div class="review-payment">
+			<h1>Xem lại giỏ hàng</h1>
+		</div>
 		<div class="table-responsive cart_info">
 			<table class="table table-condensed">
 				<thead>
@@ -67,26 +95,14 @@
 					@endforeach
 				</tbody>
 			</table>
-			<div class="col-md-12">
-				<div class="row">
-					<div class="col-md-6">
-						<h1>Tổng tiền : {{ ($total) }} VNĐ</h1>
-					</div>
-					<div class="col-md-6" style="padding-top: 20px;">
-						<a href="{{ route('cart.delete',['id' => 'all']) }}" class="btn btn-danger" style=" float:right">Xóa giỏ hàng</a>
-						<a href="{{ route('page.home') }}" class="btn btn-success float-right m-2" style=" float:right">Tiếp tục mua hàng</a>
-					</div>
-				</div>
-			</div>
-			@if(Auth::check())
-			<a class="btn btn-default check_out" href="{{route('checkout.show')}}">Thanh toán</a>
-			@else
-			<a class="btn btn-default check_out" href="{{route('customer.login')}}">Thanh toán</a>
-			@endif
+			<ul>
+				<li>Tổng tiền <span>{{ ($total) }} VNĐ</span></li>
+				<li>Phí vận chuyển <span>{{ optional($bill->ship)->ship }} VNĐ</span></li>
+			</ul>
 		</div>
-		@else
-		<h2>Giỏ hàng rỗng</h2>
-		@endif
-	</div>
+		<div class="col-md-12">
+			<a href="{{ route('checkout.order', ['id' => $bill->id]) }}" class="btn btn-success float-right m-2">Xác nhận đơn hàng</a>
+		</div>
+		@endforeach
 </section>
 @endsection

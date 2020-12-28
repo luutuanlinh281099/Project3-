@@ -102,7 +102,25 @@
                         </p>
                     </a>
                 </li>
-
+                <!-- Vận chuyển  -->
+                <li class="nav-item">
+                    <a href="{{ route('ship.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Vận chuyển
+                        </p>
+                    </a>
+                </li>
+                <!-- Tin tức  -->
+                <li class="nav-item">
+                    <a href="{{ route('new.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Tin tức
+                        </p>
+                    </a>
+                </li>
+                <!-- quyền  -->
                 <li class="nav-item">
                     <a href="{{ route('permission.create') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>

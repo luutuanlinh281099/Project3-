@@ -52,8 +52,8 @@
                             </div>
                             <div class="choose">
                                 <ul class="nav nav-pills nav-justified">
-                                    <li><a href="{{ route('cart.add', ['id' => $product->id]) }}"><i class="fa fa-plus-square"></i>Thêm vào giở hàng</a></li>
-                                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                                    <li><a href="{{ route('cart.add', ['id' => $product->id]) }}"><i class="fa fa-plus-square"></i>Mua ngay</a></li>
+                                    <li><a href="{{ route('cart.addfast', ['id' => $product->id]) }}"><i class="fa fa-plus-square"></i>Thêm vào giỏ hàng</a></li>
                                 </ul>
                             </div>
                         </div>
