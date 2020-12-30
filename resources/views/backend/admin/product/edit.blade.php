@@ -64,12 +64,14 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Nhập tags cho sản phẩm</label>
-                            <select name="tags[]" class="form-control tags_select_choose">
+                            <div class="input-group">
+                                <label>Nhập tags</label>
+                                <input type="text" class="bootstrap-tagsinput form-control" data-role="tagsinput" name="tags[]" placeholder="Nhập tag" 
                                 @foreach($product->tags as $tagItem )
-                                <option value="{{ $tagItem->name }}" selected>{{ $tagItem->name }}</option>
+                                value="{{ $tagItem->name }}" 
                                 @endforeach
-                            </select>
+                                />
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Lượt xem</label>

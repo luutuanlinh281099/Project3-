@@ -66,10 +66,9 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <label>Nhập tags cho sản phẩm</label>
-                            <select name="tags[]" class="form-control tags_select_choose">
-                            </select>
+                        <div class="input-group">
+                            <label>Nhập tags</label>
+                            <input type="text" class="bootstrap-tagsinput form-control" data-role="tagsinput" name="tags[]" placeholder="Nhập tag" value="" />
                         </div>
                         <div class="form-group">
                             <label>Lượt xem</label>

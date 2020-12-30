@@ -8,6 +8,8 @@ use Brian2694\Toastr\Facades\Toastr;
 use App\Product;
 use App\User;
 use App\Order;
+use App\OrderDetail;
+use Illuminate\Support\Facades\DB;
 
 session_start();
 class AdminController extends Controller
@@ -47,6 +49,18 @@ class AdminController extends Controller
         $product = Product::count();
         $customer = User::count();
         $order = Order::count();
-        return view('backend.home', compact('product', 'customer', 'order'));
+        $momney = OrderDetail::sum('product_price');
+        return view('backend.home', compact('product', 'customer', 'order', 'momney'));
+    }
+
+    public function search(Request $request)
+    {
+        $from = $request->datefrom;
+        $to = $request->dateto;
+        $product = Product::whereBetween('created_at', [$from, $to])->count();
+        $customer = User::whereBetween('created_at', [$from, $to])->count();
+        $order = Order::whereBetween('created_at', [$from, $to])->count();
+        $momney = OrderDetail::whereBetween('created_at', [$from, $to])->sum('product_price');
+        return view('backend.home', compact('product', 'customer', 'order', 'momney'));
     }
 }

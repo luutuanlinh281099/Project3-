@@ -17,7 +17,7 @@ class AdminOrderController extends Controller
 
     public function index()
     {
-        $orders = $this->order->latest()->paginate(10);
+        $orders = $this->order->latest()->get();
         return view('backend.admin.order.index', compact('orders'));
     }
 
@@ -41,6 +41,14 @@ class AdminOrderController extends Controller
         $order = $this->order->find($id);
         $orderDetails = $order->orderDetail;
         return view('backend.admin.order.detail', compact('order' ,'orderDetails'));
+    }
+
+    public function search(Request $request)
+    {
+        $from = $request->datefrom;
+        $to = $request->dateto;
+        $orders = Order::whereBetween('created_at', [$from, $to])->get();
+        return view('backend.admin.order.index', compact('orders'));
     }
 
     public function unconfimred()

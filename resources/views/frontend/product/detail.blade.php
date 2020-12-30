@@ -74,6 +74,9 @@
                             </form>
                             <p><b>Danh mục:</b> {{ $product->category->name }}</p>
                             <p><b>Thương hiệu</b> {{ $product->brand->name }}</p>
+                            @foreach($product->tags as $tag)
+                            <p><b>Tags</b> {{ $tag->name }}</p>
+                            @endforeach
                             <p name="view" value="{{ $product->view}}"><b>Lượt xem</b> {{$product->view}}</p>
                         </div>
                         <!--/product-information-->

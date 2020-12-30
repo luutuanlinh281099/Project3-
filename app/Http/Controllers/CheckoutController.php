@@ -83,18 +83,15 @@ class CheckoutController extends Controller
             ]);
         }
         Toastr::success('Thanh toán thành công', 'THANH TOÁN', ["positionClass" => "toast-top-center"]);
-        return redirect()->route('checkout.thank');
+        return redirect()->route('checkout.mail');
     }
 
     public function mail()
     {
-        $data['cart'] = FacadesCart::content();
-        $to_name = 'Tuấn Linh';
-        $to_email = 'sutlavao99l@gmail.com';
-        Mail::send('errors.mail', $data['cart'], function ($message) use ($to_name, $to_email) {
-            $message->to($to_email)->subject('test mail nhé');
-            $message->from($to_email, $to_name);
-        });
+        $id = Auth::user()->id;
+        $bill = Bill::where('user_id', $id)->latest()->first();
+        $cart = FacadesCart::content();
+        Mail::to($bill->email)->send(new \App\Mail\MyTestMail($cart, $bill));
         return redirect()->route('checkout.thank');
     }
 

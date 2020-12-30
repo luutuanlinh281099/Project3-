@@ -36,7 +36,6 @@
                 <div class="row">
                     <p> {{$Item->content}} </p>
                 </div>
-
                 @endforeach
             </div>
         </div>

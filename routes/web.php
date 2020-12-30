@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('send-mail', 'CheckoutController@testSendMail');
+
 // BACKEND
 //  đăng nhập vào hệ thống admin
 Route::get('/adminlogin', [
@@ -30,6 +33,10 @@ Route::get('/adminlogout', [
 Route::get('/adminhome', [
     'as' => 'admin.home',
     'uses' => 'AdminController@adminhome',
+]);
+Route::post('/adminsearch', [
+    'as' => 'admin.search',
+    'uses' => 'AdminController@search',
 ]);
 
 // Danh mục
@@ -304,6 +311,10 @@ Route::prefix('order')->group(function () {
         'as' => 'order.detail',
         'uses' => 'AdminOrderController@detail',
         'middleware' => 'can:order',
+    ]);
+    Route::post('/search', [
+        'as' => 'order.search',
+        'uses' => 'AdminOrderController@search',
     ]);
     Route::get('/unconfimred', [
         'as' => 'order.unconfimred',
