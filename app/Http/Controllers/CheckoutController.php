@@ -101,6 +101,7 @@ class CheckoutController extends Controller
         $brands = Brand::get();
         $sliders = Slider::latest()->get();
         FacadesCart::destroy();
+        Toastr::success('Cảm ơn bạn đã chọn chúng tôi', 'CẢM ƠN', ["positionClass" => "toast-top-center"]);
         return view('errors.thank', compact('sliders', 'categories', 'brands',));
     }
 }

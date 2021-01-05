@@ -23,16 +23,30 @@
             @include('frontend.partials.sidebar')
             <div class="col-sm-9 padding-right">
                 <h2 class="title text-center">Tin tức mới nhất</h2>
-                @foreach($news as $new)
-                <div class="row">
-                    <div class="col-md-3 col-4">
-                        <p style="font-size: 20px; text-align: center">{{ $new->id }}</p>
-                    </div>
-                    <div class="col-md-9 col-8">
-                        <a href="{{ route('new.detail', ['id' => $new->id] ) }}" class="item-title" style="font-size: 20px;">{{ $new->name }}</a>
-                    </div>
+                <div class="col-md-12" style="margin-top:30px">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Tiêu đề</th>
+                                <th scope="col">Lượt xem</th>
+                                <th scope="col">Quản lí</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($news as $new)
+                            <tr>
+                                <td>{{ $new->id }}</td>
+                                <td>{{ $new->name }}</td>
+                                <td>{{ $new->view}}</td>
+                                <td>
+                                    <a href="{{ route('new.detail', ['id' => $new->id]) }}" class="btn btn-success">Chi tiết</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-                @endforeach
             </div>
         </div>
     </div>

@@ -25,7 +25,7 @@ class NewController extends Controller
         $newDetails = Newpaper::where('id', $id)->get();
         $brands = Brand::get();
         $categories = Category::where('parent_id', 0)->get();
-        DB::table('newpapers')->where('id', $id)->increment('view', 1);
+        Newpaper::where('id', $id)->increment('view', 1);
         return view('frontend.new.detail', compact('categories', 'brands', 'newDetails'));
     }
 }

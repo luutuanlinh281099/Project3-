@@ -394,6 +394,10 @@ Route::prefix('new')->group(function () {
 
 //  quyền
 Route::prefix('permissions')->group(function () {
+    Route::get('/index', [
+        'as' => 'permission.index',
+        'uses' => 'AdminPermissionController@index',
+    ]);
     Route::get('/create', [
         'as' => 'permission.create',
         'uses' => 'AdminPermissionController@create',

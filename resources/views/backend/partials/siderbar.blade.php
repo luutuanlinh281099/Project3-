@@ -122,7 +122,7 @@
                 </li>
                 <!-- quyền  -->
                 <li class="nav-item">
-                    <a href="{{ route('permission.create') }}" class="nav-link">
+                    <a href="{{ route('permission.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Phân Quyền
@@ -130,8 +130,8 @@
                     </a>
                 </li>
                 <li style="margin-top:100px">
-                    <a href="{{ route('admin.logout') }}" class="btn btn-info btn-lg">
-                        <span class="glyphicon glyphicon-log-out"></span> Đăng xuất khỏi ADMIN
+                    <a href="{{ route('admin.logout') }}" class="btn btn-info btn-lg" style="color:yellow">
+                        <span class="glyphicon glyphicon-log-out"></span> Đăng xuất
                     </a>
                 </li>
             </ul>

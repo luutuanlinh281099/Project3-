@@ -59,7 +59,7 @@
                             <label>Chọn thương hiệu</label>
                             <select class="form-control select2_init" name="brand_id">
                                 @foreach($brands as $brand)
-                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                <option value="{{ $brand->id }}" selected>{{ $brand->name }}</option>
                                 @endforeach
                             </select>
                         </div>

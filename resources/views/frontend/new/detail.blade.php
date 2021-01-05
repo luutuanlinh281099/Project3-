@@ -26,15 +26,15 @@
                 <h2 class="title text-center">Chi tiết tin tức</h2>
                 @foreach($newDetails as $Item)
                 <div class="row">
-                    <div class="col-md-3 col-4">
-                        <p style="font-size: 20px; text-align: center">{{ $Item->id }}</p>
-                    </div>
                     <div class="col-md-9 col-8">
-                        <h2 style="font-size: 20px"> {{$Item->name}} </h2>
+                        <h2 style="font-size: 20px"> {{ $Item->name }} </h2>
                     </div>
                 </div>
                 <div class="row">
-                    <p> {{$Item->content}} </p>
+                    <p> {{ $Item->content }} </p>
+                </div>
+                <div class="row">
+                    <h4> Lượt xem: {{ $Item->view }} </h4>
                 </div>
                 @endforeach
             </div>

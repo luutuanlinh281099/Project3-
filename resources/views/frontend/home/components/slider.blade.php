@@ -9,7 +9,6 @@
                         <li data-target="#slider-carousel" data-slide-to="1"></li>
                         <li data-target="#slider-carousel" data-slide-to="2"></li>
                     </ol>
-
                     <div class="carousel-inner">
                         @foreach($sliders as $key => $Item)
                         <div class="item {{$key == 0 ? 'active' : ''}}">
@@ -17,11 +16,10 @@
                                 <h1><span>SHOP</span>-Lưu Tuấn Linh</h1>
                                 <h2>{{ $Item->name }}</h2>
                                 <p>{{ $Item->description }}</p>
-                                <button type="button" class="btn btn-default get">Xem thêm</button>
+                                <a href="{{ route('new.all')}}" type="button" class="btn btn-default get">Xem thêm</a>
                             </div>
                             <div class="col-sm-6">
-                                <img src="{{config('app.base_url').$Item->image_path}}" class="girl img-responsive" alt="" />
-                                <img src="/eshopper/images/home/pricing.png" class="pricing" alt="" />
+                                <img src="{{config('app.base_url').$Item->image_path}}" class="girl img-responsive" style="height:300; width:300"/>
                             </div>
                         </div>
                         @endforeach

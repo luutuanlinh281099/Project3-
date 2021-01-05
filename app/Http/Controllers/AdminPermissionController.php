@@ -8,6 +8,12 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class AdminPermissionController extends Controller
 {
+    public function index()
+    {
+        $permissions = Permission::get();
+        return view('backend.admin.permission.index', compact('permissions'));
+    }
+
     public function create()
     {
         return view('backend.admin.permission.add');

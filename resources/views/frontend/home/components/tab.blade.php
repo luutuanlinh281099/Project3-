@@ -19,7 +19,7 @@
                 <div class="product-image-wrapper">
                     <div class="single-products">
                         <div class="productinfo text-center">
-                            <img src="{{ config('app.base_url') . $product->feature_image_path }}" alt="" />
+                            <img src="{{ config('app.base_url') . $product->feature_image_path }}" alt="" style="height:250px" />
                             <h2>{{ number_format($product->price) }} VND</h2>
                             <p>{{ $product->name }}</p>
                             <a href="{{ route('cart.add', ['id' => $product->id]) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
